@@ -1,0 +1,16 @@
+{
+    "name": "omerucel/miniframe",
+    "type": "library",
+    "require": {
+        "php": ">=5.5.0",
+        "symfony/http-foundation": "2.3.4",
+        "zendframework/zend-config": "2.*",
+        "symfony/console": "2.3.*",
+        "monolog/monolog": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "MiniFrame": "src/"
+        }
+    }
+}
