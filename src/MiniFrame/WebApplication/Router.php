@@ -49,7 +49,7 @@ class Router
     /**
      * @return Route
      */
-    public function createRoute()
+    protected function createRoute()
     {
         $pathInfo = $this->getPathInfo();
         $requestMethod = $this->getRequestMethod();
@@ -80,7 +80,7 @@ class Router
     /**
      * @return string
      */
-    public function getPathInfo()
+    protected function getPathInfo()
     {
         $pathInfo = '/';
         if (!empty($_SERVER['PATH_INFO'])) {
@@ -105,7 +105,7 @@ class Router
     /**
      * @return string
      */
-    public function getRequestMethod()
+    protected function getRequestMethod()
     {
         $requestMethod = strtolower($_SERVER['REQUEST_METHOD']);
         if ($this->isXhrRequest()) {
@@ -118,7 +118,7 @@ class Router
     /**
      * @return boolean
      */
-    public function isXhrRequest()
+    protected function isXhrRequest()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }

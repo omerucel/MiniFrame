@@ -2,13 +2,13 @@
 
 namespace MiniFrame\ConsoleApplication;
 
-use MiniFrame\Di\IDi;
+use MiniFrame\Di\Di;
 use Symfony\Component\Console\Command\Command;
 
 abstract class BaseCommand extends Command
 {
     /**
-     * @return IDi
+     * @return Di
      */
     public function getDi()
     {

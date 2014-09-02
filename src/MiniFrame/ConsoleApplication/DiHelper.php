@@ -2,26 +2,26 @@
 
 namespace MiniFrame\ConsoleApplication;
 
-use MiniFrame\Di\IDi;
+use MiniFrame\Di\Di;
 use Symfony\Component\Console\Helper\Helper;
 
 class DiHelper extends Helper
 {
     /**
-     * @var IDi
+     * @var Di
      */
     protected $dependencyInjection;
 
     /**
-     * @param IDi $dependencyInjection
+     * @param Di $dependencyInjection
      */
-    public function __construct(IDi $dependencyInjection)
+    public function __construct(Di $dependencyInjection)
     {
         $this->dependencyInjection = $dependencyInjection;
     }
 
     /**
-     * @return IDi
+     * @return Di
      */
     public function getDi()
     {

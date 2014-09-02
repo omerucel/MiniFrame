@@ -1,11 +1,10 @@
 <?php
 
-namespace MiniFrame\Extra\Service\MonologService;
+namespace MiniFrame\Logger;
 
-/**
- * İstek sırasında yazılan log satırlarına numara tanımlamak için kütüphanenin LineFormatter sınıfı genişletilmiştir.
- */
-class LineFormatter extends \Monolog\Formatter\LineFormatter
+use Monolog\Formatter\LineFormatter;
+
+class MonologLineFormatter extends LineFormatter
 {
     protected $logCounter = 0;
 
