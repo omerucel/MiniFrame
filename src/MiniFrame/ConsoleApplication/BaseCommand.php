@@ -10,8 +10,12 @@ abstract class BaseCommand extends Command
     /**
      * @return Di
      */
-    public function getDi()
+    protected function getDi()
     {
-        return $this->getHelperSet()->get('di');
+        /**
+         * @var DiHelper $diHelper
+         */
+        $diHelper = $this->getHelperSet()->get('di');
+        return $diHelper->getDi();
     }
 }
