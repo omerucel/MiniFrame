@@ -5,6 +5,12 @@ namespace MiniFrame\Di;
 interface Di
 {
     /**
+     * @param $namespace
+     * @return mixed
+     */
+    public function setServiceNamespace($namespace);
+
+    /**
      * @param $name
      * @param bool $reloadShared
      * @return mixed

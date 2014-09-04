@@ -2,6 +2,7 @@
 
 $classLoader = include(realpath(__DIR__ . '/../') . '/vendor/autoload.php');
 $diImpl = new \MiniFrame\Di\DiImpl();
+$diImpl->setServiceNamespace('Application\DiService');
 $diImpl->set('class_loader', $classLoader);
 
 /**

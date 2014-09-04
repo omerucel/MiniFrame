@@ -5,6 +5,16 @@ namespace MiniFrame\Di;
 class DiImpl implements Di
 {
     protected $items = [];
+    protected $serviceNamespace;
+
+    /**
+     * @param $namespace
+     * @return mixed
+     */
+    public function setServiceNamespace($namespace)
+    {
+        $this->serviceNamespace = $namespace;
+    }
 
     /**
      * @param $name
@@ -23,15 +33,45 @@ class DiImpl implements Di
     public function get($name, $reloadShared = false)
     {
         if (isset($this->items[$name])) {
-            if ($this->items[$name]['shared_object'] != null && $reloadShared == false) {
-                return $this->items[$name]['shared_object'];
-            }
+            return $this->getFromCallback($name, $reloadShared);
+        } else {
+            return $this->getFromService($name);
+        }
+    }
 
-            $value = call_user_func_array($this->items[$name]['value'], [$this]);
-            if ($this->items[$name]['is_shared']) {
-                $this->items[$name]['shared_object'] = $value;
-            }
-            return $value;
+    /**
+     * @param $name
+     * @param bool $reloadShared
+     * @return mixed
+     */
+    protected function getFromCallback($name, $reloadShared = false)
+    {
+        if ($this->items[$name]['shared_object'] != null && $reloadShared == false) {
+            return $this->items[$name]['shared_object'];
+        }
+
+        $value = call_user_func_array($this->items[$name]['value'], [$this]);
+        if ($this->items[$name]['is_shared']) {
+            $this->items[$name]['shared_object'] = $value;
+        }
+        return $value;
+    }
+
+    /**
+     * @param $name
+     * @return mixed|null
+     */
+    protected function getFromService($name)
+    {
+        /**
+         * @var DiService $object
+         */
+        $className = $this->serviceNamespace . '\\' . str_replace(' ', '', ucwords(str_replace('_', ' ', $name)))
+            . 'Service';
+        $object = new $className();
+        if ($object instanceof DiService) {
+            $this->set($name, array($object, 'getService'), $object->isShared());
+            return $this->getFromCallback($name);
         }
         return null;
     }
